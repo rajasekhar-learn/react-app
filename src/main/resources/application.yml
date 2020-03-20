@@ -1,0 +1,38 @@
+
+### DEV### DEFAULT ###
+
+application:
+  properties:
+    hive-url: "jdbc:hive2://localhost:10000/default"
+    hive-driver: org.apache.hive.jdbc.HiveDriver
+    avrage-for-female-responses: select * from servay_analysis_female_results
+    avrage-for-all-responses: select * from servay_analysis_all_results
+    hadoop-config: "C:\\apps\\hadoop\\etc\\hadoop\\"
+server:
+  port: 9100
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/metricsdb
+    username: root
+    password: hive
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+---
+#### PROD ###
+application:
+  properties:
+    hive-url: jdbc:hive2://localhost:10000/default
+    hive-driver: org.apache.hive.jdbc.HiveDriver
+    avrage-for-female-responses: select * from servay_analysis_female_results
+    avrage-for-all-responses: select * from servay_analysis_all_results
+    hadoop-config: C:\\apps\\hadoop\\etc\\hadoop\\
+server:
+  port: 9100
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:hive2://localhost:10000/default
+    username:
+    password:
+    driverClassName: org.apache.hive.jdbc.HiveDriver

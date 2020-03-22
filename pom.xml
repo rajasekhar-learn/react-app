@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<hive.jdbc.version>3.1.2</hive.jdbc.version>
+		<hive.jdbc.version>2.3.6</hive.jdbc.version>
 		<hadoop.version>2.7.3</hadoop.version>
 		<frontend-src-dir>${project.basedir}/src/main/app</frontend-src-dir>
 		<node.version>v12.16.1</node.version>
@@ -59,11 +59,10 @@
 			<version>1.16.16</version>
 		</dependency>
 		<!-- hive jdbbc driver -->
-
 		<dependency>
 			<groupId>org.apache.hive</groupId>
 			<artifactId>hive-jdbc</artifactId>
-			<version>3.1.2</version>
+			<version>${hive.jdbc.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.eclipse.jetty.aggregate</groupId>
@@ -81,61 +80,18 @@
 					<artifactId>servlet-api</artifactId>
 					<groupId>javax.servlet</groupId>
 				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-client</artifactId>
-			<version>${hadoop.version}</version>
-			<type>jar</type>
-			<exclusions>
 				<exclusion>
-					<artifactId>slf4j-log4j12</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j</artifactId>
-					<groupId>log4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>servlet-api</artifactId>
-					<groupId>javax.servlet</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-common</artifactId>
-			<version>${hadoop.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>servlet-api</artifactId>
-					<groupId>javax.servlet</groupId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
+					<artifactId>javax.servlet</artifactId>
+					<groupId>org.eclipse.jetty.orbit</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.hive</groupId>
 			<artifactId>hive-exec</artifactId>
-			<version>3.1.2</version>
+			<version>${hive.jdbc.version}</version>
 			<type>jar</type>
 			<exclusions>
-				<exclusion>
-					<artifactId>servlet-api</artifactId>
-					<groupId>javax.servlet</groupId>
-				</exclusion>
 				<exclusion>
 					<artifactId>slf4j-log4j12</artifactId>
 					<groupId>org.slf4j</groupId>
@@ -144,12 +100,18 @@
 					<artifactId>log4j</artifactId>
 					<groupId>log4j</groupId>
 				</exclusion>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>javax.servlet</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>javax.servlet</artifactId>
+					<groupId>org.eclipse.jetty.orbit</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<!--hive dependecies end-->
-
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -174,11 +136,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

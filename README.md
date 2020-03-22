@@ -13,3 +13,4 @@ step4: if hive is running in local at localhost:10000/default \
 java -jar -Dspring.profiles.active=prod react-app.jar \
 if mysql running localhost:3306/metricsdb then run below \
 java -jar -Dspring.profiles.active=dev react-app.jar \
+see ui at http://localhost:9100 \

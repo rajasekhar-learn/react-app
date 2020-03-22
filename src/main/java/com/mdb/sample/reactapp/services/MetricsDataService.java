@@ -1,6 +1,6 @@
 package com.mdb.sample.reactapp.services;
 
-import com.mdb.sample.reactapp.mapper.FunctionUtils;
+import com.mdb.sample.reactapp.functions.FunctionUtils;
 import com.mdb.sample.reactapp.model.ServayResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,16 @@ public class MetricsDataService {
     @Autowired
     Environment environment;
 
-    public List<ServayResult> getFemaleCatogoryResults(){
-        return jdbcTemplate.query(environment.getProperty("application.properties.avrage-for-female-responses"), FunctionUtils.resultsMappingFunction :: apply);
+    public List<ServayResult> getFemaleCatogoryResults() {
+        log.debug("getting female category results ..");
+        return jdbcTemplate.query(environment.getProperty("application.properties.avrage-for-female-responses"),
+                FunctionUtils.resultsMappingFunction::apply);
     }
 
-    public List<ServayResult> getAllCatogoryResults(){
-        return jdbcTemplate.query(environment.getProperty("application.properties.avrage-for-all-responses"), FunctionUtils.resultsMappingFunction :: apply);
+    public List<ServayResult> getAllCatogoryResults() {
+        log.debug("getting all category results ..");
+        return jdbcTemplate.query(environment.getProperty("application.properties.avrage-for-all-responses"),
+                FunctionUtils.resultsMappingFunction::apply);
     }
 
 }

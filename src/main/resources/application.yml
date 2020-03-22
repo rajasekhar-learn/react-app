@@ -3,8 +3,6 @@
 
 application:
   properties:
-    hive-url: "jdbc:hive2://localhost:10000/default"
-    hive-driver: org.apache.hive.jdbc.HiveDriver
     avrage-for-female-responses: select * from servay_analysis_female_results
     avrage-for-all-responses: select * from servay_analysis_all_results
     hadoop-config: "C:\\apps\\hadoop\\etc\\hadoop\\"
@@ -22,8 +20,6 @@ spring:
 #### PROD ###
 application:
   properties:
-    hive-url: jdbc:hive2://localhost:10000/default
-    hive-driver: org.apache.hive.jdbc.HiveDriver
     avrage-for-female-responses: select * from servay_analysis_female_results
     avrage-for-all-responses: select * from servay_analysis_all_results
     hadoop-config: C:\\apps\\hadoop\\etc\\hadoop\\

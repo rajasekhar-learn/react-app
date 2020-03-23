@@ -16,8 +16,8 @@ public class MetricsDataController {
     MetricsDataService metricsDataService;
 
     @GetMapping("/servay-responses")
-    public List<ServayResult> getServayResultsByResponsesCatagory(@RequestParam(required = false,defaultValue = "ALL") String catagory ){
-        if("ALL".equalsIgnoreCase(catagory)){
+    public List<ServayResult> getServayResultsByResponsesCatagory(@RequestParam(required = false,defaultValue = "ALL") String category ){
+        if("ALL".equalsIgnoreCase(category)){
             return metricsDataService.getAllCatogoryResults();
         }else {
             return metricsDataService.getFemaleCatogoryResults();

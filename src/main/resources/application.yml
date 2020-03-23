@@ -1,5 +1,23 @@
 
-### DEV### DEFAULT ###
+### local ### ###
+application:
+  properties:
+    avrage-for-female-responses: select * from servay_analysis_female_results
+    avrage-for-all-responses: select * from servay_analysis_all_results
+    hadoop-config: "C:\\apps\\hadoop\\etc\\hadoop\\"
+server:
+  port: 9100
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+    h2:
+      console:
+        enabled: true
+---
+### DEV### ###
 
 application:
   properties:
@@ -15,7 +33,6 @@ spring:
     username: root
     password: hive
     driverClassName: com.mysql.cj.jdbc.Driver
-
 ---
 #### PROD ###
 application:

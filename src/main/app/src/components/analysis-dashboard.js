@@ -1,39 +1,69 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import  SurvayResultsLineChart  from "./SurvayResultsLineChart";
+import axios from 'axios';
 
-import  AvarageResponsesOfAllResultsList  from "./ResponseForAllAgeGroups";
-import  AvarageResponsesOfFemaleResultsList  from "./ResponsesByFemaleCatogoryResultsList";
+export default class AnalysisDashBoard extends React.Component {
+ 
+  constructor(props){
+      super(props);
+      this.state={
+        resultNotPresent: true,
+        errorMsg:"",
+        servayResults: [],
+        description:""
+      }
+      this.fetchState = this.fetchState.bind(this);
+      this.renderButton=this.renderButton.bind(this);
+    }
+    
+fetchState(api){
+  let url="/servay-responses"
+  if(api.url!=="/all"){
+    url="/servay-responses?category=female"
+  }
+  axios.get(url).then(response=>{
+      this.setState({
+          resultNotPresent: false,
+          errorMsg:"",
+          servayResults: response.data,
+          description: api.description
+        });
+  }).catch(error=>{
+    this.setState({
+        resultNotPresent: false,
+        errorMsg:"unable to fetch analysis results !.",
+        servayResults: [],
+        description: api.description
+      })
+    return error;
+  });
+  }
 
-export default function AnalysisDashBoard() {
-  return (
-    <Router>
-      <div>
-      <div class="container">
-        <div class="row">
-            <div class="col">
-                <Link to="/all"><button type="button" class="btn btn-primary">Avarage Servay responses by all</button></Link>
-            </div>
-            <div class="col">
-                <Link to="/female"><button type="button" class="btn btn-primary">Avarage Servay responses by female</button></Link>
-            </div>
-        </div>
-    </div>
-        
-       
-        <Switch>
-          <Route path="/all">
-            <AvarageResponsesOfAllResultsList />
-          </Route>
-          <Route path="/female">
-            <AvarageResponsesOfFemaleResultsList />
-          </Route>
-        </Switch>
+  renderButton(item) {
+    return (
+      <div class="col">
+      <button type="button" class="btn btn-primary" onClick={()=> this.fetchState(item) } >{item.description}  </button>
       </div>
-    </Router>
-  );
+    );
+  }
+
+  render(){
+    const items = [
+      {url : "/all", description: "Avarage Servay responses for all"},
+      {url : "/female", description: "Avarage Servay responses for female"}
+    ];
+    return (
+        <div>
+            <div class="container">
+              <div class="row">
+                { items.map(this.renderButton) }
+              </div>
+          </div>
+          <br/>
+          {!this.state.resultNotPresent &&
+           <SurvayResultsLineChart data={this.state} description={this.state.description}/>
+          }
+        </div>
+    );
+  }
 }

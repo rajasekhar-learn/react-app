@@ -7,6 +7,5 @@ export default function Footer(){
             <h6 class="">© 2020. Sample  project by rajasekhar !!</h6>
         </nav>
     </div>
-    
   );
 }
